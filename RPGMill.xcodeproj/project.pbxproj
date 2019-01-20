@@ -7,14 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C301E70121F3D3C9006A6599 /* dataHolders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C301E70021F3D3C9006A6599 /* dataHolders.swift */; };
+		C301E70321F3E9C6006A6599 /* MapSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C301E70221F3E9C6006A6599 /* MapSheetViewController.swift */; };
+		C349E9AE21F42B7F0080FD46 /* CharacterSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349E9AD21F42B7F0080FD46 /* CharacterSheetViewController.swift */; };
+		C349E9B021F42BEA0080FD46 /* CharacterGenericDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349E9AF21F42BEA0080FD46 /* CharacterGenericDataViewController.swift */; };
+		C349E9B921F446AD0080FD46 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349E9B821F446AD0080FD46 /* ErrorViewController.swift */; };
+		C349E9BC21F44A7D0080FD46 /* CharacterEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349E9BA21F44A7D0080FD46 /* CharacterEditorViewController.swift */; };
 		C39BF31E21EBEC4800AA4E81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BF31D21EBEC4800AA4E81 /* AppDelegate.swift */; };
 		C39BF32021EBEC4800AA4E81 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BF31F21EBEC4800AA4E81 /* ViewController.swift */; };
 		C39BF32221EBEC4800AA4E81 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39BF32121EBEC4800AA4E81 /* Document.swift */; };
 		C39BF32421EBEC4800AA4E81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C39BF32321EBEC4800AA4E81 /* Assets.xcassets */; };
 		C39BF32721EBEC4800AA4E81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C39BF32521EBEC4800AA4E81 /* Main.storyboard */; };
+		C39D308521F1960D00BDA668 /* OverviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D308421F1960D00BDA668 /* OverviewItem.swift */; };
+		C39D308721F1D4F100BDA668 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D308621F1D4F100BDA668 /* EditorViewController.swift */; };
+		C39D308921F1DAEB00BDA668 /* MapEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D308821F1DAEB00BDA668 /* MapEditorViewController.swift */; };
+		C39D308B21F1DC4300BDA668 /* EditorTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D308A21F1DC4300BDA668 /* EditorTab.swift */; };
+		C39D308F21F3394500BDA668 /* AddGameElementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D308E21F3394500BDA668 /* AddGameElementButton.swift */; };
+		C3DC33BE21F12ADA00EA57F2 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC33BD21F12ADA00EA57F2 /* GameData.swift */; };
+		C3DC33C021F12AEF00EA57F2 /* MapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC33BF21F12AEF00EA57F2 /* MapData.swift */; };
+		C3DC33C221F12AFC00EA57F2 /* CharacterPlayableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC33C121F12AFC00EA57F2 /* CharacterPlayableData.swift */; };
+		C3DC33C421F12B0500EA57F2 /* CharacterUnplayableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC33C321F12B0500EA57F2 /* CharacterUnplayableData.swift */; };
+		C3DC33C621F12B0F00EA57F2 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC33C521F12B0F00EA57F2 /* LocationData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C301E70021F3D3C9006A6599 /* dataHolders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataHolders.swift; sourceTree = "<group>"; };
+		C301E70221F3E9C6006A6599 /* MapSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSheetViewController.swift; sourceTree = "<group>"; };
+		C349E9AD21F42B7F0080FD46 /* CharacterSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSheetViewController.swift; sourceTree = "<group>"; };
+		C349E9AF21F42BEA0080FD46 /* CharacterGenericDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterGenericDataViewController.swift; sourceTree = "<group>"; };
+		C349E9B821F446AD0080FD46 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		C349E9BA21F44A7D0080FD46 /* CharacterEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterEditorViewController.swift; sourceTree = "<group>"; };
 		C39BF31A21EBEC4800AA4E81 /* RPGMill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPGMill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39BF31D21EBEC4800AA4E81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C39BF31F21EBEC4800AA4E81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,6 +45,16 @@
 		C39BF32621EBEC4800AA4E81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C39BF32821EBEC4800AA4E81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C39BF32921EBEC4800AA4E81 /* RPGMill.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RPGMill.entitlements; sourceTree = "<group>"; };
+		C39D308421F1960D00BDA668 /* OverviewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItem.swift; sourceTree = "<group>"; };
+		C39D308621F1D4F100BDA668 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
+		C39D308821F1DAEB00BDA668 /* MapEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEditorViewController.swift; sourceTree = "<group>"; };
+		C39D308A21F1DC4300BDA668 /* EditorTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorTab.swift; sourceTree = "<group>"; };
+		C39D308E21F3394500BDA668 /* AddGameElementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGameElementButton.swift; sourceTree = "<group>"; };
+		C3DC33BD21F12ADA00EA57F2 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		C3DC33BF21F12AEF00EA57F2 /* MapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapData.swift; sourceTree = "<group>"; };
+		C3DC33C121F12AFC00EA57F2 /* CharacterPlayableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPlayableData.swift; sourceTree = "<group>"; };
+		C3DC33C321F12B0500EA57F2 /* CharacterUnplayableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterUnplayableData.swift; sourceTree = "<group>"; };
+		C3DC33C521F12B0F00EA57F2 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +68,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C349E9B521F432770080FD46 /* SheetViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C349E9AD21F42B7F0080FD46 /* CharacterSheetViewController.swift */,
+				C301E70221F3E9C6006A6599 /* MapSheetViewController.swift */,
+			);
+			name = SheetViewControllers;
+			sourceTree = "<group>";
+		};
+		C349E9B621F4328F0080FD46 /* EditorViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C39D308A21F1DC4300BDA668 /* EditorTab.swift */,
+				C39D308621F1D4F100BDA668 /* EditorViewController.swift */,
+				C39D308821F1DAEB00BDA668 /* MapEditorViewController.swift */,
+				C349E9BA21F44A7D0080FD46 /* CharacterEditorViewController.swift */,
+			);
+			name = EditorViewControllers;
+			sourceTree = "<group>";
+		};
+		C349E9B721F432C20080FD46 /* Custom Elements */ = {
+			isa = PBXGroup;
+			children = (
+				C39D308E21F3394500BDA668 /* AddGameElementButton.swift */,
+			);
+			name = "Custom Elements";
+			sourceTree = "<group>";
+		};
 		C39BF31121EBEC4800AA4E81 = {
 			isa = PBXGroup;
 			children = (
@@ -55,15 +115,35 @@
 		C39BF31C21EBEC4800AA4E81 /* RPGMill */ = {
 			isa = PBXGroup;
 			children = (
+				C3DC33BC21F12A8500EA57F2 /* game classes */,
+				C349E9B521F432770080FD46 /* SheetViewControllers */,
+				C349E9B621F4328F0080FD46 /* EditorViewControllers */,
+				C349E9B721F432C20080FD46 /* Custom Elements */,
 				C39BF31D21EBEC4800AA4E81 /* AppDelegate.swift */,
 				C39BF31F21EBEC4800AA4E81 /* ViewController.swift */,
 				C39BF32121EBEC4800AA4E81 /* Document.swift */,
+				C39D308421F1960D00BDA668 /* OverviewItem.swift */,
+				C349E9B821F446AD0080FD46 /* ErrorViewController.swift */,
+				C349E9AF21F42BEA0080FD46 /* CharacterGenericDataViewController.swift */,
 				C39BF32321EBEC4800AA4E81 /* Assets.xcassets */,
 				C39BF32521EBEC4800AA4E81 /* Main.storyboard */,
 				C39BF32821EBEC4800AA4E81 /* Info.plist */,
 				C39BF32921EBEC4800AA4E81 /* RPGMill.entitlements */,
 			);
 			path = RPGMill;
+			sourceTree = "<group>";
+		};
+		C3DC33BC21F12A8500EA57F2 /* game classes */ = {
+			isa = PBXGroup;
+			children = (
+				C3DC33BD21F12ADA00EA57F2 /* GameData.swift */,
+				C301E70021F3D3C9006A6599 /* dataHolders.swift */,
+				C3DC33BF21F12AEF00EA57F2 /* MapData.swift */,
+				C3DC33C121F12AFC00EA57F2 /* CharacterPlayableData.swift */,
+				C3DC33C321F12B0500EA57F2 /* CharacterUnplayableData.swift */,
+				C3DC33C521F12B0F00EA57F2 /* LocationData.swift */,
+			);
+			name = "game classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,6 +178,11 @@
 				TargetAttributes = {
 					C39BF31921EBEC4800AA4E81 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -136,9 +221,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3DC33C621F12B0F00EA57F2 /* LocationData.swift in Sources */,
+				C3DC33C421F12B0500EA57F2 /* CharacterUnplayableData.swift in Sources */,
+				C39D308521F1960D00BDA668 /* OverviewItem.swift in Sources */,
+				C39D308721F1D4F100BDA668 /* EditorViewController.swift in Sources */,
 				C39BF32021EBEC4800AA4E81 /* ViewController.swift in Sources */,
+				C3DC33BE21F12ADA00EA57F2 /* GameData.swift in Sources */,
+				C39D308F21F3394500BDA668 /* AddGameElementButton.swift in Sources */,
+				C349E9B921F446AD0080FD46 /* ErrorViewController.swift in Sources */,
 				C39BF31E21EBEC4800AA4E81 /* AppDelegate.swift in Sources */,
+				C39D308921F1DAEB00BDA668 /* MapEditorViewController.swift in Sources */,
+				C301E70121F3D3C9006A6599 /* dataHolders.swift in Sources */,
+				C349E9AE21F42B7F0080FD46 /* CharacterSheetViewController.swift in Sources */,
+				C39D308B21F1DC4300BDA668 /* EditorTab.swift in Sources */,
+				C349E9B021F42BEA0080FD46 /* CharacterGenericDataViewController.swift in Sources */,
+				C301E70321F3E9C6006A6599 /* MapSheetViewController.swift in Sources */,
+				C3DC33C021F12AEF00EA57F2 /* MapData.swift in Sources */,
 				C39BF32221EBEC4800AA4E81 /* Document.swift in Sources */,
+				C3DC33C221F12AFC00EA57F2 /* CharacterPlayableData.swift in Sources */,
+				C349E9BC21F44A7D0080FD46 /* CharacterEditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>characterPlayables</key>
+	<array>
+		<dict>
+			<key>location</key>
+			<dict>
+				<key>rotation</key>
+				<integer>0</integer>
+				<key>mapID</key>
+				<string>defaultMap</string>
+				<key>x</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
+			<key>image</key>
+			<string>characterPlayable</string>
+			<key>id</key>
+			<string>defaultCharacter</string>
+		</dict>
+	</array>
+	<key>characterUnplayables</key>
+	<array>
+		<dict>
+			<key>id</key>
+			<string>defaultNPC</string>
+			<key>image</key>
+			<string>characterUnplayable</string>
+			<key>location</key>
+			<dict>
+				<key>mapID</key>
+				<string>defaultMap</string>
+				<key>rotation</key>
+				<integer>0</integer>
+				<key>y</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>0</integer>
+			</dict>
+		</dict>
+	</array>
+	<key>maps</key>
+	<array>
+		<dict>
+			<key>tileSize</key>
+			<integer>100</integer>
+			<key>image</key>
+			<string>map</string>
+			<key>id</key>
+			<string>defaultMap</string>
+		</dict>
+	</array>
+</dict>
+</plist>
