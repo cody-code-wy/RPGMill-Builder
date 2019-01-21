@@ -12,29 +12,58 @@ class CharacterPlayableData: NSObject, NSCoding {
 
     static let keyName = "characterPlayables"
     
-    var id: String
-    var imageName: String
-    var image: NSImage?
-    var location: LocationData
+    unowned var parent: GameData
     
-    init(id: String, imageName: String, location: LocationData){
+    @objc var id: String {
+        didSet {
+            guard id != oldValue else { return }
+            parent.undoManager?.setActionName("Change Character Name")
+            parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: MapData.id), object: oldValue)
+        }
+    }
+    @objc var imageName: String {
+        didSet {
+            guard imageName != oldValue else { return }
+            parent.undoManager?.setActionName("Change Character ImageName")
+            parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: imageName), object: oldValue)
+        }
+    }
+    @objc var image: NSImage? {
+        didSet {
+            guard image != oldValue else { return }
+            parent.undoManager?.setActionName("Change Character Image")
+            parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: image), object: oldValue)
+        }
+    }
+    @objc var location: LocationData {
+        didSet {
+            guard location != oldValue else { return }
+            parent.undoManager?.setActionName("Change Character Location")
+            parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: location), object: oldValue)
+        }
+    }
+    
+    init(id: String, imageName: String, location: LocationData, gameData: GameData){
         self.id = id
         self.imageName = imageName
         self.location = location
+        self.parent = gameData
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         guard let id = aDecoder.decodeObject(forKey: "id") as? String,
             let imageName = aDecoder.decodeObject(forKey: "image") as? String,
-            let location = aDecoder.decodeObject(forKey: "location") as? LocationData
+            let location = aDecoder.decodeObject(forKey: "location") as? LocationData,
+            let gameData = aDecoder.decodeObject(forKey: "gameData") as? GameData
             else { return nil }
-        self.init(id: id, imageName: imageName, location: location)
+        self.init(id: id, imageName: imageName, location: location, gameData: gameData)
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
         aCoder.encode(imageName, forKey: "image")
         aCoder.encode(location, forKey: "location")
+        aCoder.encode(parent, forKey: "gameData")
     }
     
 }
