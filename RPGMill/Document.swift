@@ -14,13 +14,18 @@ class Document: NSDocument {
     
     override init() {
         super.init()
+        gameData?.undoManager = undoManager
         // Add your subclass-specific initialization here.
     }
 
     override class var autosavesInPlace: Bool {
         return true
     }
-
+    
+    override class func canConcurrentlyReadDocuments(ofType typeName: String) -> Bool {
+        return true
+    }
+    
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
         let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
@@ -29,6 +34,9 @@ class Document: NSDocument {
     }
 
     override func fileWrapper(ofType typeName: String) throws -> FileWrapper {
+        for windowController in windowControllers {
+            windowController.window?.makeFirstResponder(nil) // deselect all fields so they will save
+        }
         if let gameData = gameData {
             let data = try! NSKeyedArchiver.archivedData(withRootObject: gameData, requiringSecureCoding: false)
             let gameDataFW = FileWrapper(regularFileWithContents: data)
@@ -41,11 +49,14 @@ class Document: NSDocument {
     
     override func read(from fileWrapper: FileWrapper, ofType typeName: String) throws {
         if let gameDataFW = fileWrapper.fileWrappers!["gameData.bplist"] {
-            gameData = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(gameDataFW.regularFileContents!) as! GameData
+            if let gameData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(gameDataFW.regularFileContents!) as? GameData {
+                self.gameData = gameData
+            }
         }
         if let gameDatafolder = fileWrapper.fileWrappers!["gameData"] {
             gameData?.loadFileWrapper(fileWrapper: gameDatafolder)
         }
+        gameData?.undoManager = undoManager
     }
 
 }

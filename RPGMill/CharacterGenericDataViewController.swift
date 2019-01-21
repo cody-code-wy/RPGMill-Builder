@@ -47,7 +47,7 @@ class CharacterGenericDataViewController: NSViewController {
             let rotation = getCharacterFacing()
             let x = getXPosition()
             let y = getYPosition()
-            return LocationData(mapID: map.id, rotation: rotation, x: x, y: y)
+            return LocationData(map: map, rotation: rotation, x: x, y: y)
         }
         return nil
     }
@@ -75,17 +75,11 @@ class CharacterGenericDataViewController: NSViewController {
     }
     
     func getXPosition() -> Int {
-        if let num = Int(xPositionTextField.stringValue) {
-            return num
-        }
-        return 0
+        return xPositionTextField.integerValue
     }
     
     func getYPosition() -> Int {
-        if let num = Int(yPositionTextField.stringValue) {
-            return num
-        }
-        return 0
+        return yPositionTextField.integerValue
     }
     
     func buildMapSelector() {
@@ -97,6 +91,7 @@ class CharacterGenericDataViewController: NSViewController {
         }
         if items.count > 0 {
             for item in items {
+                item.isEnabled = true
                 menu.addItem(item)
             }
             mapsSelectorPopUpButton?.menu = menu

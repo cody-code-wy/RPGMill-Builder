@@ -22,7 +22,8 @@ class MapEditorViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        //let editor = self.parent as! EditorViewController
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.NSUndoManagerDidUndoChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.NSUndoManagerDidRedoChange, object: nil)
     }
     
     override func mouseDown(with event: NSEvent) {
@@ -32,14 +33,12 @@ class MapEditorViewController: NSViewController {
     @IBAction func mapNameTextFieldDidUpdate(_ sender: NSTextField) {
         guard let map = map else { return }
         map.id = sender.stringValue
-        editorViewController?.viewController?.outlineView.reloadData()
+        editorViewController?.viewController?.reloadOutline()
     }
     
     @IBAction func tileSizeTextFieldDidChange(_ sender: NSTextField) {
-        guard let map = map,
-            let tileSize = Int(sender.stringValue)
-            else { return }
-        map.tileSize = tileSize
+        guard let map = map else { return }
+        map.tileSize = sender.integerValue
     }
     
     @IBAction func mapImageDidChange(_ sender: NSImageView) {
@@ -61,9 +60,17 @@ extension MapEditorViewController: EditorTab {
             else { return }
         self.map = map
         self.gameData = gameData
-        mapNameTextField.stringValue = map.id
-        tileSizeTextField.stringValue = String(map.tileSize)
-        imageView.image = map.image
-        imageFileNameLabel.stringValue = map.imageName
+        reloadView()
+    }
+    
+    @objc func reloadView() {
+        mapNameTextField.stringValue = map?.id ?? ""
+        if let map = map {
+            tileSizeTextField.integerValue = map.tileSize
+        } else {
+            tileSizeTextField.stringValue = ""
+        }
+        imageView.image = map?.image
+        imageFileNameLabel.stringValue = map?.imageName ?? ""
     }
 }

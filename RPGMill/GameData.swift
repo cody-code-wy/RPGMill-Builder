@@ -14,6 +14,8 @@ class GameData: NSObject, NSCoding {
     var characters = [CharacterPlayableData]()
     var npcs = [CharacterUnplayableData]()
     
+    var undoManager: UndoManager?
+        
     init(maps: [MapData], characters: [CharacterPlayableData], npcs: [CharacterUnplayableData]){
         self.maps = maps
         self.characters = characters
@@ -42,6 +44,13 @@ class GameData: NSObject, NSCoding {
                 }
             }
         }
+        if let characterImages = fileWrapper.fileWrappers?["characterPlayableImages"] {
+            for character in characters {
+                if let image = characterImages.fileWrappers?[character.imageName]?.regularFileContents {
+                    character.image = NSImage(data: image)
+                }
+            }
+        }
         
     }
     
@@ -53,8 +62,43 @@ class GameData: NSObject, NSCoding {
                 mapImages[map.imageName] = FileWrapper(regularFileWithContents: image)
             }
         }
+        var characterImages = [String: FileWrapper]()
+        for character in characters {
+            if let image = character.image?.tiffRepresentation {
+                characterImages[character.imageName] = FileWrapper(regularFileWithContents: image)
+            }
+        }
         gameData["mapImages"] = FileWrapper(directoryWithFileWrappers: mapImages)
+        gameData["characterPlayableImages"] = FileWrapper(directoryWithFileWrappers: characterImages)
         return FileWrapper(directoryWithFileWrappers: gameData)
+    }
+    
+    @objc func addMap(map: MapData) {
+        maps.append(map)
+        undoManager?.setActionName("Create Map")
+        undoManager?.registerUndo(withTarget: self, selector: #selector(removeMap(map:)), object: map)
+    }
+    
+    @objc func removeMap(map: MapData) {
+        if let index = maps.lastIndex(of: map) {
+            maps.remove(at: index)
+            undoManager?.setActionName("Remove Map")
+            undoManager?.registerUndo(withTarget: self, selector: #selector(addMap(map:)), object: map)
+        }
+    }
+    
+    @objc func addCharacter(character: CharacterPlayableData) {
+        characters.append(character)
+        undoManager?.setActionName("Create Character")
+        undoManager?.registerUndo(withTarget: self, selector: #selector(removeCharacter(character:)), object: character)
+    }
+    
+    @objc func removeCharacter(character: CharacterPlayableData) {
+        if let index = characters.lastIndex(of: character) {
+            characters.remove(at: index)
+            undoManager?.setActionName("Remove Character")
+            undoManager?.registerUndo(withTarget: self, selector: #selector(addCharacter(character:)), object: character)
+        }
     }
     
 }

@@ -23,7 +23,7 @@ class CharacterSheetViewController: NSViewController {
     
     override func viewDidAppear() {
         if let controller = characterViewController {
-            let submit = #selector(self.createCharacterPressed(_:))
+            let submit = #selector(CharacterSheetViewController.createCharacterPressed(_:))
             controller.characterNameTextField.cell?.sendsActionOnEndEditing = false
             controller.characterNameTextField.action = submit
             controller.xPositionTextField.cell?.sendsActionOnEndEditing = false
@@ -52,10 +52,14 @@ class CharacterSheetViewController: NSViewController {
         guard let location = characterViewController?.getLocationData(),
             let characterName = characterViewController?.getCharacterName()
             else { return }
-        let character = CharacterPlayableData(id: characterName, imageName: imageName, location: location)
-        gameData.characters.append(character)
-        viewController?.reloadOutline()
+        
+        let character = CharacterPlayableData(id: characterName, imageName: imageName, location: location, gameData: gameData)
+        gameData.addCharacter(character: character)
+        
+        let index = gameData.characters.count - 1
+        viewController?.outlineView.insertItems(at: IndexSet(arrayLiteral: index), inParent: viewController?.charactersDataHolder, withAnimation: .effectFade)
         viewController?.selectEditingItem(item: character)
+        
         self.dismiss(self)
     }
     

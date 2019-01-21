@@ -8,26 +8,26 @@
 
 import Foundation
 
-protocol dataHolder {
+protocol DataHolder {
     func count() -> Int
     func get(at: Int) -> Any
 }
 
-class MapDataHolder: dataHolder {
-    var maps: [MapData]
-    init(maps: [MapData]){ self.maps = maps }
-    func count() -> Int { return maps.count }
-    func get(at: Int) -> Any { return maps[at] }
+class MapDataHolder: DataHolder {
+    var gameData: GameData
+    init(_ gameData: GameData){ self.gameData = gameData }
+    func count() -> Int { return gameData.maps.count }
+    func get(at: Int) -> Any { return gameData.maps[at] }
 }
-class CharacterDataHolder: dataHolder {
-    var characters: [CharacterPlayableData]
-    init(characters: [CharacterPlayableData]){ self.characters = characters }
-    func count() -> Int { return characters.count }
-    func get(at: Int) -> Any { return characters[at] }
+class CharacterDataHolder: DataHolder {
+    var gameData: GameData
+    init(_ gameData: GameData){ self.gameData = gameData }
+    func count() -> Int { return gameData.characters.count }
+    func get(at: Int) -> Any { return gameData.characters[at] }
 }
-class NpcDataHolder: dataHolder {
-    var npcs: [CharacterUnplayableData]
-    init(npcs: [CharacterUnplayableData]){ self.npcs = npcs }
-    func count() -> Int { return npcs.count }
-    func get(at: Int) -> Any { return npcs[at] }
+class NpcDataHolder: DataHolder {
+    var gameData: GameData
+    init(_ gameData: GameData){ self.gameData = gameData }
+    func count() -> Int { return gameData.npcs.count }
+    func get(at: Int) -> Any { return gameData.npcs[at] }
 }

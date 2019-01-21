@@ -13,6 +13,12 @@ class ViewController: NSViewController {
     var document: Document?
     var editorViewController: EditorViewController?
     
+    var mapsDataHolder: MapDataHolder?
+    var charactersDataHolder: CharacterDataHolder?
+    var npcsDataHolder: NpcDataHolder?
+    
+    var sendSelectionChanges = true
+    
     @IBOutlet weak var outlineView: NSOutlineView!
     
     override func loadView() {
@@ -27,7 +33,12 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         document = self.view.window?.windowController?.document as? Document
-        reloadOutline()
+        outlineView.reloadData()
+        outlineView.expandItem(nil, expandChildren: true)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadOutline), name: NSNotification.Name.NSUndoManagerDidUndoChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadOutline), name: NSNotification.Name.NSUndoManagerDidRedoChange, object: nil)
+        
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -47,18 +58,36 @@ class ViewController: NSViewController {
         }
     }
     
-    func reloadOutline() {
-        outlineView.reloadData()
-        outlineView.expandItem(nil, expandChildren: true)
+    @objc func reloadOutline() {
+        sendSelectionChanges = false
+        let selectedIndex = outlineView.selectedRow
+        let selectedItem = outlineView.item(atRow: selectedIndex)
+        let rows = outlineView.numberOfRows
+        var itemsToReload = [Any]()
+        for i in 0..<rows {
+            if let item = outlineView.item(atRow: i) as? DataHolder {
+                itemsToReload.append(item)
+            }
+        }
+        for item in itemsToReload {
+            outlineView.reloadItem(item, reloadChildren: true)
+        }
+        sendSelectionChanges = true
+        selectEditingItem(item: selectedItem)
     }
     
     func selectEditingItem(item: Any?) {
         let row = outlineView.row(forItem: item)
-        outlineView.selectRowIndexes(IndexSet([row]), byExtendingSelection: false)
+        if row >= 0 {
+            outlineView.selectRowIndexes(IndexSet([row]), byExtendingSelection: false)
+        } else {
+            outlineView.deselectAll(self)
+            editorViewController?.editorFor(item: nil, on: nil)
+        }
     }
     
     @objc func addMap() {
-        performSegue(withIdentifier: "newMapSheetSegue", sender: self)        
+        performSegue(withIdentifier: "newMapSheetSegue", sender: self)
     }
     
     @objc func addCharacter() {
@@ -69,7 +98,7 @@ class ViewController: NSViewController {
 extension ViewController: NSOutlineViewDataSource{
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let dataHolder = item as? dataHolder {
+        if let dataHolder = item as? DataHolder {
             return dataHolder.count()
         }
         if (document?.gameData) != nil {
@@ -79,17 +108,20 @@ extension ViewController: NSOutlineViewDataSource{
     }
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if let dataHolder = item as? dataHolder {
+        if let dataHolder = item as? DataHolder {
             return dataHolder.get(at: index)
         }
         if let gameData = document?.gameData {
             switch index {
             case 0:
-                return MapDataHolder(maps: gameData.maps)
+                mapsDataHolder = MapDataHolder(gameData)
+                return mapsDataHolder!
             case 1:
-                return CharacterDataHolder(characters: gameData.characters)
+                charactersDataHolder = CharacterDataHolder(gameData)
+                return charactersDataHolder!
             case 2:
-                return NpcDataHolder(npcs: gameData.npcs)
+                npcsDataHolder = NpcDataHolder(gameData)
+                return npcsDataHolder!
             default:
                 break
             }
@@ -98,7 +130,7 @@ extension ViewController: NSOutlineViewDataSource{
     }
     
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        if (item is dataHolder) {
+        if (item is DataHolder) {
             return true
         }
         return false
@@ -123,13 +155,13 @@ extension ViewController: NSOutlineViewDelegate {
     }
     
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        guard let outlineView = notification.object as? NSOutlineView,
+        guard sendSelectionChanges,
+            let outlineView = notification.object as? NSOutlineView,
             let editorView = editorViewController
             else { return }
         let selectedIndex = outlineView.selectedRow
-        if let editItem = outlineView.item(atRow: selectedIndex) {
-            editorView.editorFor(item: editItem, on: document?.gameData)
-        }
+        let editItem = outlineView.item(atRow: selectedIndex)
+        editorView.editorFor(item: editItem, on: document?.gameData)
     }
 }
 

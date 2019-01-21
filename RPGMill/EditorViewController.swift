@@ -20,14 +20,15 @@ class EditorViewController: NSTabViewController {
         // Do view setup here.
     }
     
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        guard segue.sourceController as? EditorViewController == self,
-            let destination = segue.destinationController as? EditorTab
-            else { return }
-        destination.setEditorViewController(editorViewController: self)
+    override func viewDidAppear() {
+        for item in tabView.tabViewItems {
+            if let editorTab = item.viewController as? EditorTab {
+                editorTab.setEditorViewController(editorViewController: self)
+            }
+        }
     }
-    
-    func editorFor(item: Any, on: Any?){
+
+    func editorFor(item: Any?, on: Any?){
         editing = item
         editingOn = on
         switch item {

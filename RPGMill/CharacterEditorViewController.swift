@@ -16,14 +16,29 @@ class CharacterEditorViewController: NSViewController {
     var character: CharacterPlayableData?
     var gameData: GameData?
     
+    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var imageNameLabel: NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.NSUndoManagerDidUndoChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: NSNotification.Name.NSUndoManagerDidRedoChange, object: nil)
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         reloadView()
+        characterGenericViewController?.characterNameTextField.target = self
+        characterGenericViewController?.characterNameTextField.action = #selector(characterNameDidChange)
+        characterGenericViewController?.mapsSelectorPopUpButton?.target = self
+        characterGenericViewController?.mapsSelectorPopUpButton?.action = #selector(characterLocationDidChange)
+        characterGenericViewController?.characterFacingPopUpButton?.target = self
+        characterGenericViewController?.characterFacingPopUpButton.action = #selector(characterLocationDidChange)
+        characterGenericViewController?.xPositionTextField.target = self
+        characterGenericViewController?.xPositionTextField.action = #selector(characterLocationDidChange)
+        characterGenericViewController?.yPositionTextField.target = self
+        characterGenericViewController?.yPositionTextField.action = #selector(characterLocationDidChange)
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -32,19 +47,28 @@ class CharacterEditorViewController: NSViewController {
         }
     }
     
-    func reloadView() {
+    override func mouseDown(with event: NSEvent) {
+        view.window?.makeFirstResponder(nil)
+    }
+    
+    @IBAction func imageDidChange(_ sender: Any) {
+        character?.image = imageView.image
+    }
+    
+    @objc func characterNameDidChange(){
         if let controller = characterGenericViewController,
-            let character = character,
-            let gameData = gameData {
-            controller.maps = gameData.maps
-            controller.characterNameTextField.stringValue = character.id
-            controller.mapsSelectorPopUpButton?.selectItem(withTitle: character.location.mapID)
-            controller.characterFacingPopUpButton.selectItem(withTag: character.location.rotation)
-            controller.xPositionTextField.stringValue = String(character.location.x)
-            controller.yPositionTextField.stringValue = String(character.location.y)
+            let name = controller.getCharacterName() {
+            character?.id = name
+            editorViewController?.viewController?.reloadOutline()
         }
     }
     
+    @objc func characterLocationDidChange(){
+        if let controller = characterGenericViewController,
+            let locationData = controller.getLocationData(){
+            character?.location = locationData
+        }
+    }
 }
 
 extension CharacterEditorViewController: EditorTab {
@@ -61,5 +85,19 @@ extension CharacterEditorViewController: EditorTab {
         reloadView()
     }
     
+    @objc func reloadView() {
+        if let controller = characterGenericViewController,
+            let character = character,
+            let gameData = gameData {
+            imageView.image = character.image
+            imageNameLabel.stringValue = character.imageName
+            controller.maps = gameData.maps
+            controller.characterNameTextField.stringValue = character.id
+            controller.mapsSelectorPopUpButton?.selectItem(withTitle: character.location.map.id)
+            controller.characterFacingPopUpButton.selectItem(withTag: character.location.rotation)
+            controller.xPositionTextField.stringValue = String(character.location.x)
+            controller.yPositionTextField.stringValue = String(character.location.y)
+        }
+    }
     
 }

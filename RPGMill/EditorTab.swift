@@ -11,4 +11,5 @@ import Cocoa
 protocol EditorTab {
     func setEditorViewController(editorViewController: EditorViewController?)
     func loadNewEditingItem(item: Any?, on: Any?)
+    func reloadView()
 }

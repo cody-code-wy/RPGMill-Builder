@@ -45,12 +45,19 @@ class MapSheetViewController: NSViewController {
     }
     
     @IBAction func CreatePressed(_ sender: Any) {
+        guard let gameData = gameData,
+            let viewController = viewController
+            else { self.dismiss(self); return }
+        
         let mapName = getMapName()
         let tileSize = getTileSize()
-        let map = MapData.init(id: mapName, imageName: "\(mapImageName).tiff", tileSize: tileSize)
-        gameData?.maps.append(map)
-        viewController?.reloadOutline()
-        viewController?.selectEditingItem(item: map)
+        let map = MapData.init(id: mapName, imageName: "\(mapImageName).tiff", tileSize: tileSize, gameData: gameData)
+        gameData.addMap(map: map)
+        
+        let index = gameData.maps.count - 1
+        viewController.outlineView.insertItems(at: IndexSet(arrayLiteral: index), inParent: viewController.mapsDataHolder, withAnimation: .effectFade)
+        viewController.selectEditingItem(item: map)
+                
         self.dismiss(self)
     }
     
