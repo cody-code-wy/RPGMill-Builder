@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C301E70121F3D3C9006A6599 /* dataHolders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C301E70021F3D3C9006A6599 /* dataHolders.swift */; };
 		C301E70321F3E9C6006A6599 /* MapSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C301E70221F3E9C6006A6599 /* MapSheetViewController.swift */; };
+		C3253D9C21F5B1E100C37FE6 /* NPCSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3253D9B21F5B1E100C37FE6 /* NPCSheetViewController.swift */; };
+		C3253D9E21F5B79100C37FE6 /* NPCEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3253D9D21F5B79100C37FE6 /* NPCEditorViewController.swift */; };
 		C349E9AE21F42B7F0080FD46 /* CharacterSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349E9AD21F42B7F0080FD46 /* CharacterSheetViewController.swift */; };
 		C349E9B021F42BEA0080FD46 /* CharacterGenericDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349E9AF21F42BEA0080FD46 /* CharacterGenericDataViewController.swift */; };
 		C349E9B921F446AD0080FD46 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349E9B821F446AD0080FD46 /* ErrorViewController.swift */; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		C301E70021F3D3C9006A6599 /* dataHolders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataHolders.swift; sourceTree = "<group>"; };
 		C301E70221F3E9C6006A6599 /* MapSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSheetViewController.swift; sourceTree = "<group>"; };
+		C3253D9B21F5B1E100C37FE6 /* NPCSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPCSheetViewController.swift; sourceTree = "<group>"; };
+		C3253D9D21F5B79100C37FE6 /* NPCEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NPCEditorViewController.swift; sourceTree = "<group>"; };
 		C349E9AD21F42B7F0080FD46 /* CharacterSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSheetViewController.swift; sourceTree = "<group>"; };
 		C349E9AF21F42BEA0080FD46 /* CharacterGenericDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterGenericDataViewController.swift; sourceTree = "<group>"; };
 		C349E9B821F446AD0080FD46 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 				C349E9B821F446AD0080FD46 /* ErrorViewController.swift */,
 				C301E70221F3E9C6006A6599 /* MapSheetViewController.swift */,
 				C349E9AD21F42B7F0080FD46 /* CharacterSheetViewController.swift */,
+				C3253D9B21F5B1E100C37FE6 /* NPCSheetViewController.swift */,
 			);
 			name = SheetViewControllers;
 			sourceTree = "<group>";
@@ -85,6 +90,7 @@
 				C39D308621F1D4F100BDA668 /* EditorViewController.swift */,
 				C39D308821F1DAEB00BDA668 /* MapEditorViewController.swift */,
 				C349E9BA21F44A7D0080FD46 /* CharacterEditorViewController.swift */,
+				C3253D9D21F5B79100C37FE6 /* NPCEditorViewController.swift */,
 			);
 			name = EditorViewControllers;
 			sourceTree = "<group>";
@@ -232,7 +238,9 @@
 				C3DC33BE21F12ADA00EA57F2 /* GameData.swift in Sources */,
 				C39D308F21F3394500BDA668 /* AddGameElementButton.swift in Sources */,
 				C349E9B921F446AD0080FD46 /* ErrorViewController.swift in Sources */,
+				C3253D9C21F5B1E100C37FE6 /* NPCSheetViewController.swift in Sources */,
 				C39BF31E21EBEC4800AA4E81 /* AppDelegate.swift in Sources */,
+				C3253D9E21F5B79100C37FE6 /* NPCEditorViewController.swift in Sources */,
 				C39D308921F1DAEB00BDA668 /* MapEditorViewController.swift in Sources */,
 				C301E70121F3D3C9006A6599 /* dataHolders.swift in Sources */,
 				C349E9AE21F42B7F0080FD46 /* CharacterSheetViewController.swift in Sources */,

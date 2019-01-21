@@ -51,6 +51,13 @@ class GameData: NSObject, NSCoding {
                 }
             }
         }
+        if let npcImages = fileWrapper.fileWrappers?["characterUnplayableImages"] {
+            for npc in npcs {
+                if let image = npcImages.fileWrappers?[npc.imageName]?.regularFileContents {
+                    npc.image = NSImage(data: image)
+                }
+            }
+        }
         
     }
     
@@ -68,8 +75,15 @@ class GameData: NSObject, NSCoding {
                 characterImages[character.imageName] = FileWrapper(regularFileWithContents: image)
             }
         }
+        var npcImages = [String: FileWrapper]()
+        for npc in npcs {
+            if let image = npc.image?.tiffRepresentation {
+                npcImages[npc.imageName] = FileWrapper(regularFileWithContents: image)
+            }
+        }
         gameData["mapImages"] = FileWrapper(directoryWithFileWrappers: mapImages)
         gameData["characterPlayableImages"] = FileWrapper(directoryWithFileWrappers: characterImages)
+        gameData["characterUnplayableImages"] = FileWrapper(directoryWithFileWrappers: npcImages)
         return FileWrapper(directoryWithFileWrappers: gameData)
     }
     
@@ -101,4 +115,18 @@ class GameData: NSObject, NSCoding {
         }
     }
     
+    @objc func addNPC(npc: CharacterUnplayableData) {
+        npcs.append(npc)
+        undoManager?.setActionName("Create NPC")
+        undoManager?.registerUndo(withTarget: self, selector: #selector(removeNPC(npc:)), object: npc)
+    }
+    
+    @objc func removeNPC(npc: CharacterUnplayableData) {
+        if let index = npcs.lastIndex(of: npc) {
+            characters.remove(at: index)
+            undoManager?.setActionName("Remove NPC")
+            undoManager?.registerUndo(withTarget: self, selector: #selector(addNPC(npc:)), object: npc)
+        }
+    }
+
 }

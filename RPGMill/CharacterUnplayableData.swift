@@ -42,11 +42,19 @@ class CharacterUnplayableData: NSObject, NSCoding {
             parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: location), object: oldValue)
         }
     }
+    @objc var phrase: String {
+        didSet {
+            guard phrase != oldValue else { return }
+            parent.undoManager?.setActionName("Change NPC Phrase")
+            parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: phrase), object: oldValue)
+        }
+    }
     
-    init(id: String, imageName: String, location: LocationData, gameData: GameData){
+    init(id: String, imageName: String, location: LocationData, phrase: String, gameData: GameData){
         self.id = id
         self.imageName = imageName
         self.location = location
+        self.phrase = phrase
         self.parent = gameData
     }
     
@@ -54,15 +62,17 @@ class CharacterUnplayableData: NSObject, NSCoding {
         guard let id = aDecoder.decodeObject(forKey: "id") as? String,
             let imageName = aDecoder.decodeObject(forKey: "image") as? String,
             let location = aDecoder.decodeObject(forKey: "location") as? LocationData,
+            let phrase = aDecoder.decodeObject(forKey: "phrase") as? String,
             let gameData = aDecoder.decodeObject(forKey: "gameData") as? GameData
             else { return nil }
-        self.init(id: id, imageName: imageName, location: location, gameData: gameData)
+        self.init(id: id, imageName: imageName, location: location, phrase: phrase, gameData: gameData)
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
         aCoder.encode(imageName, forKey: "image")
         aCoder.encode(location, forKey: "location")
+        aCoder.encode(phrase, forKey: "phrase")
         aCoder.encode(parent, forKey: "gameData")
     }
     

@@ -53,6 +53,9 @@ class ViewController: NSViewController {
         case let controller as CharacterSheetViewController:
             controller.gameData = document?.gameData
             controller.viewController = self
+        case let controller as NPCSheetViewController:
+            controller.gameData = document?.gameData
+            controller.viewController = self
         default:
             break
         }
@@ -93,6 +96,11 @@ class ViewController: NSViewController {
     @objc func addCharacter() {
         performSegue(withIdentifier: "newCharacterSheetSegue", sender: self)
     }
+    
+    @objc func addNPC() {
+        performSegue(withIdentifier: "newNPCSheetSegue", sender: self)
+    }
+    
 }
 
 extension ViewController: NSOutlineViewDataSource{

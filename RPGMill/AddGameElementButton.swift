@@ -20,6 +20,7 @@ class AddGameElementButton: NSButton {
         let menu = NSMenu(title: "Add Element")
         menu.addItem(NSMenuItem(title: "New Map", action: #selector(ViewController.addMap), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "New Character", action: #selector(ViewController.addCharacter), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "New NPC", action: #selector(ViewController.addNPC), keyEquivalent: ""))
         NSMenu.popUpContextMenu(menu, with: event, for: self)
     }
 }
