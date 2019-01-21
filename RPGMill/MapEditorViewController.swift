@@ -17,7 +17,7 @@ class MapEditorViewController: NSViewController {
     @IBOutlet weak var mapNameTextField: NSTextField!
     @IBOutlet weak var tileSizeTextField: NSTextField!
     @IBOutlet weak var imageView: NSImageView!
-    @IBOutlet weak var imageFileNameLabel: NSTextField!
+    @IBOutlet var loreTextView: NSTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,6 @@ class MapEditorViewController: NSViewController {
     @IBAction func mapImageDidChange(_ sender: NSImageView) {
         guard let map = map else { return }
         map.image = sender.image
-        imageFileNameLabel.stringValue = map.imageName
     }
     
 }
@@ -64,6 +63,12 @@ extension MapEditorViewController: EditorTab {
     }
     
     @objc func reloadView() {
+        if let rtf = map?.rtf,
+            let attrString = NSAttributedString(rtf: rtf, documentAttributes: nil) {
+            loreTextView.textStorage?.setAttributedString(attrString)
+        } else {
+            loreTextView.string = ""
+        }
         mapNameTextField.stringValue = map?.id ?? ""
         if let map = map {
             tileSizeTextField.integerValue = map.tileSize
@@ -71,6 +76,12 @@ extension MapEditorViewController: EditorTab {
             tileSizeTextField.stringValue = ""
         }
         imageView.image = map?.image
-        imageFileNameLabel.stringValue = map?.imageName ?? ""
+    }
+}
+
+extension MapEditorViewController: NSTextViewDelegate {
+    func textDidEndEditing(_ notification: Notification) {
+        let range = NSRange(location: 0, length: loreTextView.string.count)
+        map?.rtf = loreTextView.rtf(from: range)
     }
 }

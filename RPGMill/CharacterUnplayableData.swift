@@ -21,13 +21,6 @@ class CharacterUnplayableData: NSObject, NSCoding {
             parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: MapData.id), object: oldValue)
         }
     }
-    @objc var imageName: String {
-        didSet {
-            guard imageName != oldValue else { return }
-            parent.undoManager?.setActionName("Change NPC ImageName")
-            parent.undoManager?.registerUndo(withTarget: self, selector: #selector(setter: imageName), object: oldValue)
-        }
-    }
     @objc var image: NSImage? {
         didSet {
             guard image != oldValue else { return }
@@ -50,30 +43,67 @@ class CharacterUnplayableData: NSObject, NSCoding {
         }
     }
     
-    init(id: String, imageName: String, location: LocationData, phrase: String, gameData: GameData){
+    var imageName: String {
+        return "\(uuid).tiff"
+    }
+    
+    var rtfName: String {
+        return "\(uuid).rtf"
+    }
+    
+    let uuid: String
+    
+    var rtf: Data?
+    
+    init(id: String, uuid: String, location: LocationData, phrase: String, rtf: Data?, gameData: GameData){
         self.id = id
-        self.imageName = imageName
+        self.uuid = uuid
         self.location = location
         self.phrase = phrase
+        self.rtf = rtf
         self.parent = gameData
+    }
+    
+    convenience init(id: String, location: LocationData, phrase: String, rtf: Data?, gameData: GameData){
+        self.init(id: id, uuid: "character_\(UUID().uuidString)", location: location, phrase: phrase, rtf: rtf, gameData: gameData)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         guard let id = aDecoder.decodeObject(forKey: "id") as? String,
-            let imageName = aDecoder.decodeObject(forKey: "image") as? String,
+            let uuid = aDecoder.decodeObject(forKey: "uuid") as? String,
             let location = aDecoder.decodeObject(forKey: "location") as? LocationData,
             let phrase = aDecoder.decodeObject(forKey: "phrase") as? String,
             let gameData = aDecoder.decodeObject(forKey: "gameData") as? GameData
             else { return nil }
-        self.init(id: id, imageName: imageName, location: location, phrase: phrase, gameData: gameData)
+        self.init(id: id, uuid: uuid, location: location, phrase: phrase, rtf: nil, gameData: gameData)
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
-        aCoder.encode(imageName, forKey: "image")
+        aCoder.encode(uuid, forKey: "uuid")
         aCoder.encode(location, forKey: "location")
         aCoder.encode(phrase, forKey: "phrase")
         aCoder.encode(parent, forKey: "gameData")
+    }
+    
+    func readFileWrapper(fileWrapper: FileWrapper) {
+        if let imageData = fileWrapper.fileWrappers?[imageName]?.regularFileContents {
+            self.image = NSImage(data: imageData)
+        }
+        if let rtf = fileWrapper.fileWrappers?[rtfName]?.regularFileContents {
+            self.rtf = rtf
+        }
+    }
+    
+    func fileWrapper() -> FileWrapper? {
+        var items = [String:FileWrapper]()
+        if let image = image?.tiffRepresentation {
+            items[imageName] = FileWrapper(regularFileWithContents: image)
+        }
+        if let rtf = rtf {
+            items[rtfName] = FileWrapper(regularFileWithContents: rtf)
+        }
+        return FileWrapper(directoryWithFileWrappers: items)
     }
     
 }

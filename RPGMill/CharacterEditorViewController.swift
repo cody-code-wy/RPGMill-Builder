@@ -17,7 +17,7 @@ class CharacterEditorViewController: NSViewController {
     var gameData: GameData?
     
     @IBOutlet weak var imageView: NSImageView!
-    @IBOutlet weak var imageNameLabel: NSTextField!
+    @IBOutlet var loreTextView: NSTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,8 +89,13 @@ extension CharacterEditorViewController: EditorTab {
         if let controller = characterGenericViewController,
             let character = character,
             let gameData = gameData {
+            if let rtf = character.rtf,
+                let attrString = NSAttributedString(rtf: rtf, documentAttributes: nil) {
+                loreTextView.textStorage?.setAttributedString(attrString)
+            } else {
+                loreTextView.string = ""
+            }
             imageView.image = character.image
-            imageNameLabel.stringValue = character.imageName
             controller.maps = gameData.maps
             controller.characterNameTextField.stringValue = character.id
             controller.mapsSelectorPopUpButton?.selectItem(withTitle: character.location.map.id)
@@ -100,4 +105,11 @@ extension CharacterEditorViewController: EditorTab {
         }
     }
     
+}
+
+extension CharacterEditorViewController: NSTextViewDelegate {
+    func textDidEndEditing(_ notification: Notification) {
+        let range = NSRange(location: 0, length: loreTextView.string.count)
+        character?.rtf = loreTextView.rtf(from: range)
+    }
 }

@@ -12,7 +12,6 @@ class MapSheetViewController: NSViewController {
 
     var gameData: GameData?
     var viewController: ViewController?
-    var mapImageName = "map_\(UUID().uuidString)"
     
     @IBOutlet weak var tileSizeTextField: NSTextField!
     @IBOutlet weak var mapNameTextField: NSTextField!
@@ -20,7 +19,7 @@ class MapSheetViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        mapNameTextField.placeholderString = mapImageName
+        mapNameTextField.placeholderString = MapData.uuid
         tileSizeTextField.placeholderString = String(MapData.defaultTileSize)
     }
     
@@ -51,7 +50,7 @@ class MapSheetViewController: NSViewController {
         
         let mapName = getMapName()
         let tileSize = getTileSize()
-        let map = MapData.init(id: mapName, imageName: "\(mapImageName).tiff", tileSize: tileSize, gameData: gameData)
+        let map = MapData.init(id: mapName, tileSize: tileSize, rtfd: nil, gameData: gameData)
         gameData.addMap(map: map)
         
         let index = gameData.maps.count - 1

@@ -15,9 +15,7 @@ class NPCSheetViewController: NSViewController {
     var characterViewController: CharacterGenericDataViewController?
     var viewController: ViewController?
     var gameData: GameData?
-    
-    var imageName = "npc_\(UUID().uuidString).tiff"
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -58,7 +56,7 @@ class NPCSheetViewController: NSViewController {
 
         if phrase == "" { phrase = characterPhraseTextField.placeholderString ?? "ERROR" }
         
-        let npc = CharacterUnplayableData(id: characterName, imageName: imageName, location: location, phrase: phrase, gameData: gameData)
+        let npc = CharacterUnplayableData(id: characterName, location: location, phrase: phrase, rtf: nil, gameData: gameData)
         gameData.addNPC(npc: npc)
         
         let index = gameData.npcs.count - 1

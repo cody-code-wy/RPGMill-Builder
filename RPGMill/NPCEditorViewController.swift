@@ -18,7 +18,7 @@ class NPCEditorViewController: NSViewController {
     
     @IBOutlet weak var characterPhraseTextField: NSTextField!
     @IBOutlet weak var imageView: NSImageView!
-    @IBOutlet weak var imageNameLabel: NSTextField!
+    @IBOutlet var loreTextView: NSTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,9 +94,14 @@ extension NPCEditorViewController: EditorTab {
         if let controller = characterGenericViewController,
             let npc = npc,
             let gameData = gameData {
+            if let rtf = npc.rtf,
+                let attrString = NSAttributedString(rtf: rtf, documentAttributes: nil) {
+                loreTextView.textStorage?.setAttributedString(attrString)
+            } else {
+                loreTextView.string = ""
+            }
             characterPhraseTextField.stringValue = npc.phrase
             imageView.image = npc.image
-            imageNameLabel.stringValue = npc.imageName
             controller.maps = gameData.maps
             controller.characterNameTextField.stringValue = npc.id
             controller.mapsSelectorPopUpButton?.selectItem(withTitle: npc.location.map.id)
@@ -106,4 +111,11 @@ extension NPCEditorViewController: EditorTab {
         }
     }
     
+}
+
+extension NPCEditorViewController: NSTextViewDelegate {
+    func textDidEndEditing(_ notification: Notification) {
+        let range = NSRange(location: 0, length: loreTextView.string.count)
+        npc?.rtf = loreTextView.rtf(from: range)
+    }
 }

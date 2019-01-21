@@ -59,6 +59,7 @@
 		C3DC33C121F12AFC00EA57F2 /* CharacterPlayableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPlayableData.swift; sourceTree = "<group>"; };
 		C3DC33C321F12B0500EA57F2 /* CharacterUnplayableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterUnplayableData.swift; sourceTree = "<group>"; };
 		C3DC33C521F12B0F00EA57F2 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
+		C3DDC31121F6039B009CAD1B /* DocumentIcon */ = {isa = PBXFileReference; lastKnownFileType = file; path = DocumentIcon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +123,7 @@
 		C39BF31C21EBEC4800AA4E81 /* RPGMill */ = {
 			isa = PBXGroup;
 			children = (
+				C3DDC31121F6039B009CAD1B /* DocumentIcon */,
 				C3DC33BC21F12A8500EA57F2 /* game classes */,
 				C349E9B521F432770080FD46 /* SheetViewControllers */,
 				C349E9B621F4328F0080FD46 /* EditorViewControllers */,

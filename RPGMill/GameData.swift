@@ -37,54 +37,46 @@ class GameData: NSObject, NSCoding {
     }
     
     func loadFileWrapper(fileWrapper: FileWrapper) {
-        if let mapImages = fileWrapper.fileWrappers?["mapImages"] {
+        if let mapsFW = fileWrapper.fileWrappers?["maps"] {
             for map in maps {
-                if let image = mapImages.fileWrappers?[map.imageName]?.regularFileContents {
-                    map.image = NSImage(data: image)
+                if let mapFW = mapsFW.fileWrappers?[map.uuid] {
+                    map.readFileWrapper(fileWrapper: mapFW)
                 }
             }
         }
-        if let characterImages = fileWrapper.fileWrappers?["characterPlayableImages"] {
+        if let charactersFW = fileWrapper.fileWrappers?["characters"] {
             for character in characters {
-                if let image = characterImages.fileWrappers?[character.imageName]?.regularFileContents {
-                    character.image = NSImage(data: image)
+                if let characterFW = charactersFW.fileWrappers?[character.uuid] {
+                    character.readFileWrapper(fileWrapper: characterFW)
                 }
             }
         }
-        if let npcImages = fileWrapper.fileWrappers?["characterUnplayableImages"] {
+        if let npcsFW = fileWrapper.fileWrappers?["npcs"] {
             for npc in npcs {
-                if let image = npcImages.fileWrappers?[npc.imageName]?.regularFileContents {
-                    npc.image = NSImage(data: image)
+                if let npcFW = npcsFW.fileWrappers?[npc.uuid] {
+                    npc.readFileWrapper(fileWrapper: npcFW)
                 }
             }
         }
-        
     }
     
     func fileWrapper() -> FileWrapper {
-        var gameData = [String: FileWrapper]()
-        var mapImages = [String: FileWrapper]()
+        var mapWrappers = [String:FileWrapper]()
         for map in maps {
-            if let image = map.image?.tiffRepresentation {
-                mapImages[map.imageName] = FileWrapper(regularFileWithContents: image)
-            }
+            mapWrappers[map.uuid] = map.fileWrapper()
         }
-        var characterImages = [String: FileWrapper]()
+        var characterWrappers = [String:FileWrapper]()
         for character in characters {
-            if let image = character.image?.tiffRepresentation {
-                characterImages[character.imageName] = FileWrapper(regularFileWithContents: image)
-            }
+            characterWrappers[character.uuid] = character.fileWrapper()
         }
-        var npcImages = [String: FileWrapper]()
+        var npcsWrappers = [String:FileWrapper]()
         for npc in npcs {
-            if let image = npc.image?.tiffRepresentation {
-                npcImages[npc.imageName] = FileWrapper(regularFileWithContents: image)
-            }
+            npcsWrappers[npc.uuid] = npc.fileWrapper()
         }
-        gameData["mapImages"] = FileWrapper(directoryWithFileWrappers: mapImages)
-        gameData["characterPlayableImages"] = FileWrapper(directoryWithFileWrappers: characterImages)
-        gameData["characterUnplayableImages"] = FileWrapper(directoryWithFileWrappers: npcImages)
-        return FileWrapper(directoryWithFileWrappers: gameData)
+        let mapsFW = FileWrapper(directoryWithFileWrappers: mapWrappers)
+        let charactersFW = FileWrapper(directoryWithFileWrappers: characterWrappers)
+        let npcsFW = FileWrapper(directoryWithFileWrappers: npcsWrappers)
+        return FileWrapper(directoryWithFileWrappers: ["maps":mapsFW,"characters":charactersFW,"npcs":npcsFW])
     }
     
     @objc func addMap(map: MapData) {
@@ -123,7 +115,7 @@ class GameData: NSObject, NSCoding {
     
     @objc func removeNPC(npc: CharacterUnplayableData) {
         if let index = npcs.lastIndex(of: npc) {
-            characters.remove(at: index)
+            npcs.remove(at: index)
             undoManager?.setActionName("Remove NPC")
             undoManager?.registerUndo(withTarget: self, selector: #selector(addNPC(npc:)), object: npc)
         }

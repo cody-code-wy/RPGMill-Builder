@@ -13,9 +13,7 @@ class CharacterSheetViewController: NSViewController {
     var characterViewController: CharacterGenericDataViewController?
     var viewController: ViewController?
     var gameData: GameData?
-    
-    var imageName = "character_\(UUID().uuidString).tiff"
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -53,7 +51,7 @@ class CharacterSheetViewController: NSViewController {
             let characterName = characterViewController?.getCharacterName()
             else { return }
         
-        let character = CharacterPlayableData(id: characterName, imageName: imageName, location: location, gameData: gameData)
+        let character = CharacterPlayableData(id: characterName, location: location, rtf: nil, gameData: gameData)
         gameData.addCharacter(character: character)
         
         let index = gameData.characters.count - 1
