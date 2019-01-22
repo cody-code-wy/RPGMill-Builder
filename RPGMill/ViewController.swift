@@ -89,6 +89,22 @@ class ViewController: NSViewController {
         }
     }
     
+    @IBAction func removeSelected(_ sender: Any) {
+        let row = outlineView.selectedRow
+        let item = outlineView.item(atRow: row)
+        switch item {
+        case let map as MapData:
+            document?.gameData?.removeMap(map: map)
+        case let character as CharacterPlayableData:
+            document?.gameData?.removeCharacter(character: character)
+        case let npc as CharacterUnplayableData:
+            document?.gameData?.removeNPC(npc: npc)
+        default:
+            return;
+        }
+        self.reloadOutline()
+    }
+    
     @objc func addMap() {
         performSegue(withIdentifier: "newMapSheetSegue", sender: self)
     }

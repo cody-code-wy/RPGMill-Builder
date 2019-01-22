@@ -1070,6 +1070,9 @@ Gw
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="removeSelected:" target="5gI-5U-AMq" id="NCR-7c-3yV"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>
@@ -1204,7 +1207,7 @@ Gw
             <objects>
                 <viewController title="Map" id="Sk1-Zv-BeW" customClass="MapEditorViewController" customModule="RPGMill" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="KMw-i9-6Hd">
-                        <rect key="frame" x="0.0" y="0.0" width="609" height="560"/>
+                        <rect key="frame" x="0.0" y="0.0" width="415" height="560"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XNc-pL-0Q9">
@@ -1243,7 +1246,7 @@ Gw
                                 </connections>
                             </imageView>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J7N-oe-1bw">
-                                <rect key="frame" x="95" y="518" width="494" height="22"/>
+                                <rect key="frame" x="95" y="518" width="300" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="MapName" drawsBackground="YES" id="ebX-Cv-wcJ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1254,7 +1257,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X84-YT-ohu">
-                                <rect key="frame" x="95" y="486" width="494" height="22"/>
+                                <rect key="frame" x="95" y="486" width="300" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="TileSize" drawsBackground="YES" id="sMx-mX-BMA">
                                     <numberFormatter key="formatter" formatterBehavior="custom10_4" numberStyle="decimal" allowsFloats="NO" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="oR1-8x-Dwb">
                                         <integer key="roundingIncrement" value="1"/>
@@ -1276,17 +1279,17 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZs-KF-rnK">
-                                <rect key="frame" x="95" y="20" width="494" height="300"/>
+                                <rect key="frame" x="95" y="20" width="300" height="300"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="FUj-IH-Eqf">
-                                    <rect key="frame" x="0.0" y="0.0" width="494" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="bar" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" grammarChecking="YES" smartInsertDelete="YES" id="lCl-rS-iEk">
-                                            <rect key="frame" x="0.0" y="0.0" width="494" height="300"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="494" height="300"/>
+                                            <size key="minSize" width="300" height="300"/>
                                             <size key="maxSize" width="889" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <connections>
@@ -1299,7 +1302,7 @@ Gw
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="oaG-Bo-eCs"/>
                                 </constraints>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="arN-d2-E10">
-                                    <rect key="frame" x="478" y="0.0" width="16" height="300"/>
+                                    <rect key="frame" x="284" y="0.0" width="16" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -1342,7 +1345,7 @@ Gw
                 </viewController>
                 <customObject id="MeE-ok-XxT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="166.5" y="1695"/>
+            <point key="canvasLocation" x="161" y="1695"/>
         </scene>
         <!--Character Unplayable-->
         <scene sceneID="vDm-e6-C49">
@@ -1402,7 +1405,7 @@ Gw
                                     <rect key="frame" x="0.0" y="0.0" width="431" height="214"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" spellingCorrection="YES" smartInsertDelete="YES" id="msd-Sv-wNj">
+                                        <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="bar" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" grammarChecking="YES" smartInsertDelete="YES" id="msd-Sv-wNj">
                                             <rect key="frame" x="0.0" y="0.0" width="431" height="214"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -1696,7 +1699,7 @@ DQ
                                     <rect key="frame" x="0.0" y="0.0" width="479" height="244"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" spellingCorrection="YES" smartInsertDelete="YES" id="aLd-9L-PgD">
+                                        <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="bar" continuousSpellChecking="YES" allowsUndo="YES" allowsNonContiguousLayout="YES" linkDetection="YES" spellingCorrection="YES" grammarChecking="YES" smartInsertDelete="YES" id="aLd-9L-PgD">
                                             <rect key="frame" x="0.0" y="0.0" width="479" height="244"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -1846,6 +1849,6 @@ Gw
         <image name="map" width="22.5" height="22.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1f4-k6-FUV"/>
+        <segue reference="uND-kN-x1b"/>
     </inferredMetricsTieBreakers>
 </document>
